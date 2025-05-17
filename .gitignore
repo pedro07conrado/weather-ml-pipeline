@@ -7,3 +7,4 @@ models/trained/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 !models/trained/.gitkeep
+/check_env.py

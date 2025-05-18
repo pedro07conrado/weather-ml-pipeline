@@ -1,0 +1,44 @@
+# o que estou fazendo nesse arquivo? 
+# estou subindo o PostgreSQL + um container do app Python, conectados por 
+# rede interna e ele usa o meu .env para passar as variaveis. 
+
+version: '3'
+
+services:
+  db:
+    image: postgres:16
+    container_name: postgres-weather
+    environment:
+      POSTGRES_DB: weather
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    container_name: weather-ml-app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=weather
+      - DB_USER=postgres
+      - DB_PASSWORD=root
+      - API_KEY=${API_KEY}
+      - WEATHER_CITY=${WEATHER_CITY:-Curitiba}
+      - WEATHER_UNITS=${WEATHER_UNITS:-metric}
+    volumes:
+      - ./models:/app/models
+
+volumes:
+  pgdata:

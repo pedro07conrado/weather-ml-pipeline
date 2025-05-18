@@ -7,4 +7,7 @@ models/trained/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 !models/trained/.gitkeep
+/venv/
+# Ignore this file, used to check if the environment is set up correctly
 /check_env.py
+/test_db.py

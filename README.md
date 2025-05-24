@@ -125,7 +125,7 @@ graph TD
 weather-ml-pipeline/
 ├──  notebooks/              # Análises interativas
 │   ├──  db_setup_novo.ipynb
-│   └──  model_training.ipynb
+│   └──  exploratory_novo.ipynb
 ├──  src/                    # Código principal
 │   ├──  data_collector.py   # Coleta dados da API
 │   ├──  database.py         # Operações do banco

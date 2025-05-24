@@ -8,6 +8,8 @@ models/trained/*
 !data/processed/.gitkeep
 !models/trained/.gitkeep
 /venv/
+**/.ipynb_checkpoints/
 # Ignore this file, used to check if the environment is set up correctly
 /check_env.py
 /test_db.py
+

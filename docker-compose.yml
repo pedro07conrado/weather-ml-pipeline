@@ -1,7 +1,3 @@
-# o que estou fazendo nesse arquivo? 
-# estou subindo o PostgreSQL + um container do app Python, conectados por 
-# rede interna e ele usa o meu .env para passar as variaveis. 
-
 version: '3'
 
 services:
@@ -35,10 +31,31 @@ services:
       - DB_USER=postgres
       - DB_PASSWORD=root
       - API_KEY=${API_KEY}
-      - WEATHER_CITY=${WEATHER_CITY:-Curitiba}
-      - WEATHER_UNITS=${WEATHER_UNITS:-metric}
+      - WEATHER_CITY=${WEATHER_CITY}
+      - WEATHER_UNITS=${WEATHER_UNITS}
     volumes:
       - ./models:/app/models
+
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile.jupyter
+    container_name: jupyter-weather
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=weather
+      - DB_USER=postgres
+      - DB_PASSWORD=root
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/app/notebooks
+      - ./models:/app/models
+      - ./data:/app/data
 
 volumes:
   pgdata:

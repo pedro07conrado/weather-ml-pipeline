@@ -82,6 +82,9 @@ export OPENWEATHER_API_KEY="sua_chave_aqui"
 
 # Execute tudo com Docker
 docker-compose up --build
+
+#acesse o notebook em um navegador
+http://localhost:8888/tree?
 ```
 
 **🎉 Pronto!** Seu pipeline está rodando! Acesse os logs com `docker-compose logs -f`

@@ -124,7 +124,7 @@ graph TD
 ```
 weather-ml-pipeline/
 ├──  notebooks/              # Análises interativas
-│   ├──  data_exploration.ipynb
+│   ├──  db_setup_novo.ipynb
 │   └──  model_training.ipynb
 ├──  src/                    # Código principal
 │   ├──  data_collector.py   # Coleta dados da API
